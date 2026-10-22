@@ -1,0 +1,472 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700&display=swap');
+
+:root {
+    --almost-white: #fafafa;
+    --medium-grey: #696969;
+    --almost-black: #141414;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--almost-white);
+    color: var(--almost-black);
+    font-family: 'Epilogue', sans-serif;
+}
+
+button,
+a {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid #696969;
+    outline-offset: 4px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 55px;
+    padding: 24px 40px;
+}
+
+.logo {
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.logo img {
+    display: block;
+    width: 84px;
+    height: auto;
+}
+
+.nav {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    background: transparent;
+    color: var(--medium-grey);
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.dropdown-link a:hover {
+    color: var(--almost-black);
+}
+
+.arrow-icon {
+    width: 10px;
+    height: 6px;
+    transition: transform 0.2s ease;
+}
+
+.dropdown-toggle[aria-expanded="true"] .arrow-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-list {
+    position: absolute;
+    top: calc(100% + 20px);
+    left: 0;
+    z-index: 10;
+    display: none;
+    min-width: 155px;
+    padding: 16px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 12%);
+    list-style: none;
+}
+
+.nav-item:nth-child(2) .dropdown-list {
+    min-width: 125px;
+}
+
+.nav-item.dropdown-open > .dropdown-list {
+    display: block;
+}
+
+.dropdown-link + .dropdown-link {
+    margin-top: 12px;
+}
+
+.dropdown-link a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    color: var(--medium-grey);
+    font-size: 13px;
+    transition: color 0.2s ease;
+}
+
+.dropdown-link img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.registration {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.registration button {
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--medium-grey);
+    font-size: 13px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.registration button:hover {
+    color: var(--almost-black);
+}
+
+.registration .register-button {
+    border-color: var(--medium-grey);
+}
+
+.registration .register-button:hover {
+    border-color: var(--almost-black);
+}
+
+.open-menu,
+.close-menu {
+    display: none;
+    border: 0;
+    background: transparent;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+    align-items: center;
+    gap: 80px;
+    width: min(1100px, calc(100% - 120px));
+    margin: 45px auto 60px;
+}
+
+.hero-image {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.hero-image img {
+    display: block;
+    width: 100%;
+    max-height: 570px;
+    object-fit: contain;
+}
+
+.text-content {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+    padding-bottom: 20px;
+}
+
+.text-content h1 {
+    max-width: 500px;
+    margin-bottom: 35px;
+    font-size: clamp(44px, 5.2vw, 78px);
+    font-weight: 700;
+    line-height: 1.03;
+    letter-spacing: -2px;
+}
+
+.text-content p {
+    max-width: 440px;
+    margin-bottom: 30px;
+    color: var(--medium-grey);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.learn-more {
+    padding: 15px 25px;
+    border: 1px solid var(--almost-black);
+    border-radius: 12px;
+    background: var(--almost-black);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.learn-more:hover {
+    background: transparent;
+    color: var(--almost-black);
+}
+
+.clients {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    max-width: 450px;
+    margin-top: 65px;
+}
+
+.clients img {
+    display: block;
+    width: auto;
+    max-width: 100px;
+    max-height: 32px;
+    object-fit: contain;
+    opacity: 0.65;
+    transition: opacity 0.2s ease;
+}
+
+.clients img:hover {
+    opacity: 1;
+}
+
+.attribution {
+    padding: 15px 20px 25px;
+    text-align: center;
+    color: var(--medium-grey);
+    font-size: 11px;
+}
+
+.attribution a {
+    text-decoration: underline;
+}
+
+.attribution a:hover {
+    color: var(--almost-black);
+}
+
+.overlay {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .hero-image img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .header {
+        justify-content: space-between;
+        padding: 22px 20px;
+    }
+
+    .logo img {
+        width: 84px;
+    }
+
+    .open-menu {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .open-menu img {
+        width: 32px;
+        height: auto;
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 30;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 40px;
+        width: min(65vw, 280px);
+        height: 100dvh;
+        padding: 85px 24px 30px;
+        overflow-y: auto;
+        background: white;
+        transform: translateX(100%);
+        visibility: hidden;
+        transition: transform 0.25s ease, visibility 0.25s ease;
+    }
+
+    .nav.menu-open {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    .close-menu {
+        position: absolute;
+        top: 22px;
+        right: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .close-menu img {
+        width: 26px;
+        height: auto;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+    }
+
+    .nav-link {
+        font-size: 15px;
+    }
+
+    .dropdown-list {
+        position: static;
+        min-width: 0;
+        padding: 18px 0 0 20px;
+        box-shadow: none;
+        background: transparent;
+    }
+
+    .nav-item:nth-child(2) .dropdown-list {
+        min-width: 0;
+    }
+
+    .dropdown-link a {
+        font-size: 14px;
+    }
+
+    .registration {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .registration button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .overlay.visible {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: block;
+        background: rgb(0 0 0 / 55%);
+    }
+
+    .hero {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        margin: 0 auto 35px;
+    }
+
+    .hero-image {
+        order: 1;
+        width: 100%;
+    }
+
+    .hero-image img {
+        width: 100%;
+        max-height: none;
+        object-fit: contain;
+    }
+
+    .text-content {
+        order: 2;
+        width: 100%;
+        padding: 42px 20px 0;
+        text-align: center;
+    }
+
+    .text-content h1 {
+        max-width: none;
+        margin-bottom: 20px;
+        font-size: clamp(32px, 8vw, 42px);
+        line-height: 1.1;
+        letter-spacing: -1.5px;
+        white-space: nowrap;
+    }
+
+    .text-content p {
+        max-width: 430px;
+        margin: 0 auto 24px;
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+    .learn-more {
+        padding: 14px 23px;
+    }
+
+    .clients {
+        justify-content: space-between;
+        gap: 14px;
+        width: 100%;
+        margin-top: 45px;
+    }
+
+    .clients img {
+        max-width: 21%;
+        max-height: 25px;
+    }
+
+    .attribution {
+        padding-top: 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .text-content h1 {
+        font-size: 29px;
+    }
+
+    .text-content {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .nav {
+        width: 75vw;
+    }
+}
