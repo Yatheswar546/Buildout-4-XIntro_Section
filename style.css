@@ -87,6 +87,14 @@ a:focus-visible {
     transition: color 0.2s ease;
 }
 
+.nav-link.link-open {
+    color: var(--almost-black);
+}
+
+.nav-link.link-open .arrow-icon {
+    transform: rotate(180deg);
+}
+
 .nav-link:hover,
 .dropdown-link a:hover {
     color: var(--almost-black);

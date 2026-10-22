@@ -7,17 +7,15 @@ const overlay = document.querySelector(".overlay");
 const dropdownItems = [...document.querySelectorAll(".nav-item")];
 const dropdownButtons = [...document.querySelectorAll(".dropdown-toggle")];
 
-function closeDropdowns(exceptItem = null) {
-    dropdownItems.forEach((item) => {
-        if (item === exceptItem) return;
+function closeDropdowns(exceptButton = null) {
+    dropdownButtons.forEach((button) => {
+        if (button === exceptButton) return;
 
-        item.classList.remove("dropdown-open");
+        button.classList.remove("link-open");
+        button.setAttribute("aria-expanded", "false");
 
-        const button = item.querySelector(".dropdown-toggle");
-
-        if (button) {
-            button.setAttribute("aria-expanded", "false");
-        }
+        const item = button.closest(".nav-item");
+        item?.classList.remove("dropdown-open");
     });
 }
 
@@ -26,48 +24,56 @@ dropdownButtons.forEach((button) => {
         event.stopPropagation();
 
         const item = button.closest(".nav-item");
-        const shouldOpen = !item.classList.contains("dropdown-open");
+        const isOpen = button.classList.contains("link-open");
 
         closeDropdowns();
 
-        if (shouldOpen) {
-            item.classList.add("dropdown-open");
+        if (!isOpen) {
+            button.classList.add("link-open");
             button.setAttribute("aria-expanded", "true");
-        } else {
-            item.classList.remove("dropdown-open");
-            button.setAttribute("aria-expanded", "false");
+            item.classList.add("dropdown-open");
         }
     });
 });
 
 function openMobileMenu() {
     nav.classList.add("menu-open");
-    overlay.classList.add("visible");
-    overlay.setAttribute("aria-hidden", "false");
-    openMenuButton.setAttribute("aria-expanded", "true");
+    nav.style.visibility = "visible";
+    nav.style.opacity = "1";
 
-    closeMenuButton.focus();
+    overlay.classList.add("visible");
+    overlay.style.display = "block";
+    overlay.style.visibility = "visible";
+    overlay.style.opacity = "1";
+    overlay.setAttribute("aria-hidden", "false");
+
+    openMenuButton.setAttribute("aria-expanded", "true");
 }
 
 function closeMobileMenu() {
     nav.classList.remove("menu-open");
+    nav.style.visibility = "";
+    nav.style.opacity = "";
+
     overlay.classList.remove("visible");
+    overlay.style.display = "none";
+    overlay.style.visibility = "hidden";
+    overlay.style.opacity = "0";
     overlay.setAttribute("aria-hidden", "true");
+
     openMenuButton.setAttribute("aria-expanded", "false");
 
     closeDropdowns();
-    openMenuButton.focus();
 }
 
 openMenuButton.addEventListener("click", openMobileMenu);
 closeMenuButton.addEventListener("click", closeMobileMenu);
-
 overlay.addEventListener("click", closeMobileMenu);
 
 document.addEventListener("click", (event) => {
-    const clickedInsideNavigation = nav.contains(event.target);
+    const clickedDropdown = event.target.closest(".nav-item");
 
-    if (!clickedInsideNavigation) {
+    if (!clickedDropdown) {
         closeDropdowns();
     }
 });
@@ -78,20 +84,23 @@ document.addEventListener("keydown", (event) => {
 
         if (nav.classList.contains("menu-open")) {
             closeMobileMenu();
+            openMenuButton.focus();
         }
     }
 });
 
 document.querySelectorAll(".dropdown-link a").forEach((link) => {
     link.addEventListener("click", (event) => {
-        // These are placeholder links for the assignment.
         if (link.getAttribute("href") === "#") {
             event.preventDefault();
         }
 
         closeDropdowns();
 
-        if (window.innerWidth < 768 && nav.classList.contains("menu-open")) {
+        if (
+            window.innerWidth < 768 &&
+            nav.classList.contains("menu-open")
+        ) {
             closeMobileMenu();
         }
     });
@@ -100,8 +109,18 @@ document.querySelectorAll(".dropdown-link a").forEach((link) => {
 window.addEventListener("resize", () => {
     if (window.innerWidth >= 768) {
         nav.classList.remove("menu-open");
+        nav.style.visibility = "";
+        nav.style.opacity = "";
+
         overlay.classList.remove("visible");
+        overlay.style.display = "";
+        overlay.style.visibility = "";
+        overlay.style.opacity = "";
         overlay.setAttribute("aria-hidden", "true");
+
         openMenuButton.setAttribute("aria-expanded", "false");
     }
 });
+
+// Start with dropdowns closed.
+closeDropdowns();
